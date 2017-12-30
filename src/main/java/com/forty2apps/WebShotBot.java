@@ -24,11 +24,10 @@ public class WebShotBot extends TelegramLongPollingBot {
   @Override
   public void onUpdateReceived(Update update) {
     LOGGER.info("Received update: " + update);
-    final Long chatId = update.getMessage().getChatId();
     if (update.hasMessage() && update.getMessage().hasText()) {
+      final Long chatId = update.getMessage().getChatId();
       if (urlValidator.isValid(update.getMessage().getText())) {
         sendTextMessage(chatId, "Working on it");
-
         SendPhoto sendPhotoRequest = new SendPhoto();
         sendPhotoRequest.setChatId(chatId);
         try {
